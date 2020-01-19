@@ -1,0 +1,245 @@
+\documentclass[11pt]{article}
+\textwidth 15cm 
+\textheight 21.3cm
+\evensidemargin 6mm
+\oddsidemargin 6mm
+\topmargin -1.1cm
+\setlength{\parskip}{1.5ex}
+
+\usepackage[sumlimits,nointlimits,namelimits]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage[dvips]{color}
+
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\R}{{\mathbb R}}
+
+\newtheorem {prop}{Proposition}
+\newtheorem {conj}{Conjecture}
+\newtheorem {cor}{Corollary}
+\newtheorem {thm}{Theorem}
+\newtheorem {lem}{Lemma}
+\newtheorem {ex}{Example}
+\newtheorem {fact}{Fact}
+
+\title{Math147 Notes - Kathryn Hare}
+\author{Wen Hui Zhang}
+
+\begin{document}
+	\pagenumbering{gobble}
+	\maketitle
+	\newpage
+	\pagenumbering{arabic}
+
+\section{Real Numbers}
+
+\subsection{Completeness Axiom of Real Numbers}
+Every non-empty subset of the real numbers that is bounded above has a least upper bound.
+(Similarly every non-empty subset of reals bounded below has a least upper bound)
+
+\subsection{Characterization of the Least Upper Bound (Greatest Lower Bound)}
+A is an upper bound if:
+\begin{enumerate}
+	\item A is an upper bound
+	\item For all $z \in \R$, if $z < A$, then
+\end{enumerate}
+
+\subsection{Archimedean Property}
+Given any real number $x$, there is some $N  \in \N$ such that $N > x$
+
+\subsection{Squeeze Theorem}
+\begin{thm}
+Suppose $(x_n) \leq (y_n) \leq (z_n)$ for all $n \in \N^*$. Assume $(x_n) \longrightarrow  L$ and
+$(z_n) \longrightarrow  L$. Then $(y_n) \longrightarrow  L$.
+\newline
+\newline
+For functions: If $f(x) \leq g(x) \leq h(x)$ for all $x$  "near" $a$, and if $lim_{x \to a} f(x) = L = lim_{x \to a} h(x)$,
+then also $lim_{x \to a} g(x) = L$.
+\end{thm}
+
+\subsection{Bounded Sequences}
+Say $(x_n)$ is bounded if there is some $C$ with $|x_n| \leq C$ for all $n \in \N$.
+
+\subsection{Monotonic Convergence Theorem (MCT)}
+\begin{thm}
+If $(x_n)$ is a monotonic sequence that is bounded, then $(x_n)$ converges.
+\end{thm}
+
+\paragraph{Proof of MCT}
+Suppose $(x_n)$ is increasing and bounded above. Let $A = \{x_n : n = 1 , 2 , 3 . . . \}$. Note that this set is non-empty
+and bounded above.\\ By the Completeness Axiom of $\R$, $A$ has a LUB, call it $L$.\\
+Let $\epsilon > 0$. Since $L$ is an upper bound for $A$, $x_n \leq L$ for all $n \in \N$, hence $x_n < L + \epsilon$ (for all $n$). 
+Since $L$ is LUB(A), and $L - \epsilon < L$, there is some $x_N \in A$ with $x_N > L - \epsilon$. Since $(x_n)$ is increasing,
+$x_n \geq x_N$ if $n \geq N$. $x_n > L - \epsilon$. Hence for all $n \geq N, L - \epsilon < x_n < L + \epsilon$ and therefore $(x_n) \longrightarrow L$.
+
+\subsection{Nested Interval Property}
+Given any collection of nested intervals $[a_1, b_1] \supseteq [a_2, b_2] \supseteq . . .$ with $(b_n - a_n) \longrightarrow 0$, there is a unique $x_n \in [a_n, b_n]$ for every $n$.
+
+\begin{prop}
+Every sequence has a monotonic subsequence.
+\end{prop}
+
+\subsection{Bolzano-Weierstrass Theorem}
+\begin{thm}
+Every bounded sequence has a convergent subsequence.
+\end{thm}
+
+\paragraph{Proof of BWT}
+By the previous proposition, every sequence has a monotonic subsequence. Since the original sequence is bounded,
+this subsequence is also bounded, thus by MCT, it converges.
+
+\subsection{Cauchy Sequences}
+A sequence $(x_n)$ is called Cauchy if for every $\epsilon > 0$ there is some $N \in \N$ so that $|x_n - x_m| < \epsilon$
+if $n, m \geq N$
+\begin{enumerate}
+	\item Any convergent sequence is Cauchy.
+	\item Any cauchy sequence is bounded.
+\end{enumerate}
+
+\begin{thm}
+Every Cauchy sequence converges.
+\end{thm}
+\paragraph{Proof.} Since the sequence $(x_n)$ is Cauchy it is bounded. By the BW theorem, it has a convergent subsequence $(x_n)^\infty_{k = 1}$ with limit L. Let $\epsilon > 0$. Since $(x_n)$ is Cauchy, there is some $N$ such that
+$|x_n - x_m| < \frac{\epsilon}{2}$ if $n, m \geq N$. Furthermore, since $(x_{n_k}) \longrightarrow L$, there is some index
+$n_k > N$ where $|x_{n_k} - L| < \frac{\epsilon}{2}$. Let $n \geq N$. Then $|x_n - L| \leq |x_n - x_{n_k}| + |x_{n_k} - L| \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$.
+
+\newpage
+\section{Limits of Functions}
+Say $f$ has limit $L \in \R$ at point $p$ if for every $\epsilon > 0$ there is some $\delta > 0$ such that whenever $0 < |x - p| < \delta$, then $|f(x) - L| < \epsilon$.
+
+\subsection{Continuous Functions}
+For $f: A \subseteq \R \longrightarrow \R$, $f$ is continuous at $a \in A$ if $\lim_{x \to a} f(x) = f(a)$ (one-sided limit if $a$ is an endpoint of $A$)
+For every $\epsilon > 0$, there is some $\delta > 0$, so that $|x - a| < \delta$ implies $|f(x) - f(a)| < \epsilon$.
+
+\subsection{Sequential Characterization}
+$f: A \longrightarrow \R$ is continuous at $a \in A$ if and only if whenever $(x_n)$ is a sequence from $A$ (meaning every $(x_n) \in A$) with $(x_n) \to a$, then $(f(x_n)) \to f(a)$.
+
+\subsection{Composition of Functions}
+$f: A \longrightarrow \R g: B \longrightarrow \R, B \supseteq$ Range of $f$
+
+\begin{thm}
+If $f: A \longrightarrow \R$ is continuous at $a \in A$ and $g$ is continuous at $f(a)$, then $g \circ f(x)$ is continuous at $a$.
+\end{thm}
+\paragraph{Proof.} 
+Show if $(x_n) \to a$ $(x_n \in A)$, then $(g \circ f(x_n)) \to g \circ f(a)$.\\
+Let $(x_n) \to a$, $x_n \in A$. $f$ is continuous at $a$. Thus $(f(x_n)) \to f(a)$.\\
+Let $f(x_n) = y_n$. $y_n \in$ Range $f \subseteq B$. $(y_n) \to f(a)$ and $g$ is continuous at $f(a)$.
+$(g(y_n)) \to g(f(a)) = g \circ f(a)$. Thus $g(f(x_n)) \to g \circ f(a)$. Therefore $g \circ f$ is continuous at $a$.
+
+\subsection{Intermediate Value Theorem}
+\begin{thm}
+Suppose $f: [a, b] \to \R$ is continuous. Assume $f(a) < 0$ and $f(b) > 0$. Then there exists $c \in [a, b]$ with $f(c) = 0$.
+\end{thm}
+\paragraph{Proof.}
+Let $A = \{x \in [a, b]: f(x) < 0\}$. $A$ is not empty  as $a \in A$. Also, $A$ is bounded. By the Completeness Axiom of
+$\R$, $A$ has a LUB, call it $L$. $a \leq L \leq b$ (since b is an UB for A). Hence $f$ is continuous at $L$. Notice
+
+\subsection{Extreme Value Theorem}
+
+\subsection{Increasing / Decreasing Function}
+$f$ is (strictly) increasing if whenever $x_2 > x_1$, then $f(x_2) \geq f(x_1)$.
+If $f:[a, b] \to \R$ is continuous and 1 - 1, then it is either strictly increasing or strictly decreasing.
+
+\subsection{Inverse Trig Functions}
+\begin{itemize}
+	\item $sine \to y = arcsin(x) \Leftrightarrow siny = x$ and $y = \left[ -\frac{\pi}{2}, \frac{\pi}{2}\right]$.
+	\item $cosine \to y = arccos(x) \Leftrightarrow cosy = x$ and $y = \left[ 0, \pi \right]$.
+	\item $tan \to y = arctan(x) \Leftrightarrow tany = x$ and $y = \left[ -\frac{\pi}{2}, \frac{\pi}{2}\right]$.
+\end{itemize}
+
+\subsection{Logarithm Function}
+
+\newpage
+\section{Differentiation}
+Say $f$ is differentiable at $a$ if $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$ exists and then we denote this limit by $f'(a)$.
+If $f,g$ are differentiable at $a$,
+\begin{enumerate}
+	\item $f \pm g$ is differentiable at $a$, and $(f \pm g)'(a) = f'(a) \pm g'(a)$.
+	\item $f \cdot g$ is differentiable at $a$, and $(fg)'(a) = f'(a)g(a) + g'(a)f'(a)$.
+\end{enumerate}
+\subsection{Chain Rule}
+$f: A \to B \subseteq \R$, $g: B \to \R$
+If $f$ is differentiable at $a$, and $g$ is differentiable at $f(a)$ then $g \circ f$ is differentiable at $a$ and $(g \circ f)'(a) = g'(f(a)) \cdot f'(a)$.
+
+\subsection{Caratheodory Theorem}
+\begin{thm}
+If $F$ is differentiable at $a$, then there is a function $\Phi$ which is continuous at $a$ and $F(x) - F(a) = \Phi(x)(x - a)$
+for all $x$, and $\Phi(a) = F'(a)$.
+\end{thm}
+
+\subsection{Derivatives of Inverses}
+Let $f: (c, d) -> \R$ be a continuous, $1 - 1$ function on $(c, d)$. Suppose $f$ is differentiable at $a \in (c, d)$ and $f'(a) \neq 0$. Then $f^{-1}$ is differentiable at $f(a)$ and $(f^{-1})'(f(a)) = \frac{1}{f'(a)}$.
+$($ or, write $b = f(a) \leftrightarrow f^{-1}(b) = a$ and see $(f^{-1})'(b) = \frac{1}{f'(f^{-1}(b))}$.
+
+\subsection{Implicit Differentiation}
+A point $x$ is a local maximum for $f$ if there is some $\delta > 0$ such that if $y \in (x - \delta, x + \delta)$ and $y \in$ Domain $f$, $f(y) \leq f(x)$. $x$ is a (global) maximum if $f(y) \leq f(x)$ for all $y \in$ Domain $f$.
+
+\subsection{Critical Points Theorem (CPT)}
+\begin{thm}
+If $f$ has a local max or min at $x \in (a, b) \subseteq$ Domain of $f$ and if $f$ is differentiable at $x$, then $f'(x) = 0$.
+\end{thm}
+
+\paragraph{Proof.}
+$f$ is differentiable at $x$ so $\lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$ exists.\\
+Get $\delta > 0$ from definition of local min/max if $z \in (x - \delta, x + \delta)$ then $f(x) \geq f(z)$. If $|h| < \delta$, then $x + h \epsilon (x - \delta, x + \delta)$.\\
+Therefore, $f(x+h) - f(x) \leq 0$. If $0 < h < \delta$, then $\frac{f(x+h) - f(x)}{h} \leq 0$, so $\lim_{h \to 0^-} \frac{f(x+h) - f(x)}{h} \geq 0$. If $-\delta < h < 0$, then $\lim_{h \to 0^-} \frac{f(x+h) - f(x)}{h} \geq 0 \Rightarrow$ since limit exists, $\lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = 0$, so $f'(x) = 0$.
+
+\subsection{Mean Value Theorem}
+If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$ then there is a $c \in (a, b)$ such that $f'(c) = \frac{f(b) - f(a)}{b - a}$.
+
+\subsection{Rolle's Theorem}
+If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$ and $f(a) = f(b)$, then there is a $c \in (a, b)$ such that $f'(c) = 0$
+
+\paragraph{Proof.}
+Since $f$ is continuous on $[a, b]$ it has a global maximum and minimum by EVT. If one of these occurs at some point $c \in (a, b)$, then since $f$ is differentiable there, $f'(c) = 0$ by CPT. Otherwise, the global max and min occur at $a$ and $b$, and $f(a) = f(b)$, and that implies that $f$ is constant, and so $f'(c) = 0$ for every $c \in (a, b)$.
+
+\subsection{Increasing Function Theorem}
+If $f'(x) \geq 0$ for every $x \in (a, b)$ and $f$ is continuous on $[a, b]$, then $f$ is increasing on $[a, b]$.
+
+\subsection{First Derivative Test}
+Assume $f$ is continuous on $[a, b]$ and $c \in [a, b]$.
+\begin{enumerate}
+	\item If $f' \geq 0$ on $(a, c)$ and $f' \leq 0$ on $(c, b)$ then $c$ in local max.
+	\item If $f' \leq 0$ on $(a, c)$ and $f' \geq 0$ on $(c, b)$ then $c$ in local min.
+	\item If $f'$ is some sign on both sides (i.e. $> 0$ or $< 0$ on both sides) then $c$ is neither local max/min.
+\end{enumerate}
+
+\subsection{Second Derivative}
+Say $f$ is concave up on interval $I$ if $f'(x)$ is strictly increasing on $I$. Say $f$ is concave down on $I$ if $f'(x)$ is strictly
+decreasing on $I$. Call $c$ an inflection point if $f'(c)$ exists at $c$ and the concavity of $f$ changes at $c$. $\exists \delta > 0$ such that $f$ is concave up on $(c - \delta, c)$ and down on $(c, c + \delta)$ (or vice versa).
+
+\subsection{Second Derivative Test}
+Suppose $f'(c) = 0$.
+\begin{enumerate}
+	\item If $f''(c) > 0$ ($< 0$) then $f$ has a local min (max) atc.
+	\item If $f''(c) = 0$, then anything is possible.
+\end{enumerate}
+
+\subsection{Cauchy Mean Value Theorem}
+If $f, g$ are continuous on $[a, b]$ and differentiable on $(a, b)$, then there is some $c \in (a, b)$ such that
+$(f(b) - f(a))g'(c) = f'(c)(g(b) - g(a))$.
+
+\subsection{L'Hopital's Rule}
+Assume $f, g$ are differentiable on interval $I = [a -\delta, a + \delta]$ except possibly at $a$. Assume $\lim_{x \to a} f(x)  = \lim_{x \to a} g(x)$ and either $\lim_{x \to a} f = 0$ or $\infty$. Suppose $g, g'$ are non-zero at $I$, except perhaps at $a$. If $\lim_{x \to a} \frac{f'(x)}{g'(x)} = L \in \R$, then $\lim_{x \to a} \frac{f(x)}{g(x)} = L$.
+
+\paragraph{Proof.}
+$\lim_{x \to a} f(x) = 0 = \lim_{x \to a} g(x)$. Recall $f, g$ were defined and differentiable on $I = [a - \delta_0, a + \delta_0]$ for some $\delta_0 > 0$ except possibly at $a$. (Re)define $f$ and $g$ at $a$ by setting $f(a) = g(a) = 0$. This does not change $f'$ or $g'$ at points $x \neq a$. Our new $f, g$ are still differentiable on $I$ except possibly at $a$. Since $\lim_{x \to a} f = f(a) = 0$. To see that $lim_{x \to a} \frac{f}{g} = L$, we have to take any $\epsilon > 0$ and find $\delta > 0$ such that $0 < |x - a| < \delta$, then $|\frac{f}{g}(x) - L| < \epsilon$. Know that $\lim_{x \to a} \frac{f'}{g'} = L$. Let $\epsilon > 0$. Then there exists $\delta_1 > 0$ such that $0 < |x - a| < \delta_1 \Longrightarrow |\frac{f'}{g'}(x) - L| < \epsilon$. Let $\delta = min(\delta_0, \delta_1) > 0$. Let $0 < |x - a| < \delta$.\\\\
+Suppose $x > a$. We have $f, g$ continuous on $[a, x]$ and differentiable on $(a, x)$. So CMVT applies. Hence there exists a $c \in (a, x)$ such that, $(f(x) - f(a))g'(c) = f'(c)(g'(x) - g'(a))$. By assumption, $g'(c) \neq 0$ since $c \neq a$. Also, $g(x) - g(a) \neq 0$ since $g(a) = 0$ and $g(z) \neq 0$ for any $z \in I$, except $z = a$. Divide to get:\\
+\begin{equation*}
+\frac{f'(c)}{g'(c)} = \frac{f(x) - f(a)}{g(x) - g(a)}
+\end{equation*}
+
+\noindent Thus,\\
+\begin{equation*}
+|\frac{f(x)}{g(x)} - L| = |\frac{f(x) - f(a)}{g(x) - g(a)} - L| = |\frac{f'(c)}{g'(c)} - L|
+\end{equation*}
+
+\noindent for some $c \in (a, x)$. Hence $0 < |c - a| < \delta \leq delta_1$, so $|\frac{f(x)}{g(x)} - L| = |\frac{f'(c)}{g'(c)} - L| < \epsilon$.
+
+\subsection{Taylor Polynomials}
+
+\subsection{Taylor's Theorem}
+
+
+\end{document}
